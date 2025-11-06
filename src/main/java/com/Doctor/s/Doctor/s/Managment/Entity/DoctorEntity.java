@@ -14,6 +14,8 @@ public class DoctorEntity {
     private String email;
     private String phone;
     private String address;
+    private String fee;
+    private String password;
 
     //Setter
 
