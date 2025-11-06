@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/doctors")
 public class DoctorController {
@@ -17,4 +19,15 @@ public class DoctorController {
     public DoctorEntity createDoctor(@RequestBody DoctorEntity doctor){
         return doctorService.createDoctor(doctor);
     }
+
+    @GetMapping("/alldoctors")
+    public List<DoctorEntity> getAll(){
+        return doctorService.getAll();
+    }
+
+    @GetMapping("/{id}")
+    public DoctorEntity getById(@PathVariable Long id){
+        return doctorService.getById(id);
+    }
+
 }
