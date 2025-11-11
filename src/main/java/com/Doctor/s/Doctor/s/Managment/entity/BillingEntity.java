@@ -1,4 +1,4 @@
-package com.Doctor.s.Doctor.s.Managment.Entity;
+package com.Doctor.s.Doctor.s.Managment.entity;
 
 
 import jakarta.persistence.Entity;
