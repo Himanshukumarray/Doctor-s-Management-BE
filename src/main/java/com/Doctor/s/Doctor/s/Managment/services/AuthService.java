@@ -36,8 +36,7 @@ public class AuthService {
                     new ArrayList<>()
             );
 
-            String token = jwtUtil.generateToken(userDetails);
-
+            String token = jwtUtil.generateToken(userDetails, user.getRole());
 
             return token;
         } else {

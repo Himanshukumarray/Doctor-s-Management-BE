@@ -3,6 +3,7 @@ package com.Doctor.s.Doctor.s.Managment.security;
 import com.Doctor.s.Doctor.s.Managment.entity.UserEntity;
 import com.Doctor.s.Doctor.s.Managment.repository.AuthRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -25,6 +26,11 @@ public class CustomUserDetailsService implements UserDetailsService {
             throw new UsernameNotFoundException("User not found with email: " + email);
         }
 
-        return new User(user.getEmail(), user.getPassword(), Collections.emptyList());
+        // ✅ Add user role as authority (e.g., ROLE_DOCTOR, ROLE_PATIENT)
+        return new User(
+                user.getEmail(),
+                user.getPassword(),
+                Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + user.getRole().toUpperCase()))
+        );
     }
 }
