@@ -1,10 +1,7 @@
 package com.Doctor.s.Doctor.s.Managment.entity;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -16,41 +13,53 @@ public class BillingEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private BigDecimal amount;
-    private String paymentStatus;
-    private LocalDateTime paymentDate;
+    // ✅ 1-to-1 mapping with AppointmentEntity
+    @OneToOne
+    @JoinColumn(name = "appointment_id", referencedColumnName = "id")
+    private AppointmentEntity appointment;
 
-    private Long appointmentId;
+    private Double amount;
 
-    public BigDecimal getAmount() {
-        return amount;
+    private String paymentMethod; // e.g., Cash, Card, UPI
+
+    private String paymentStatus; // e.g., PENDING, PAID, FAILED
+
+    private LocalDateTime billDate;
+
+    private String description;
+
+    // ✅ Constructor: auto set bill date
+    @PrePersist
+    public void onCreate() {
+        this.billDate = LocalDateTime.now();
     }
 
-    public void setAmount(BigDecimal amount) {
-        this.amount = amount;
-    }
+    // Getters and Setters
+    public Long getId() { return id; }
 
-    public String getPaymentStatus() {
-        return paymentStatus;
-    }
+    public void setId(Long id) { this.id = id; }
 
-    public void setPaymentStatus(String paymentStatus) {
-        this.paymentStatus = paymentStatus;
-    }
+    public AppointmentEntity getAppointment() { return appointment; }
 
-    public LocalDateTime getPaymentDate() {
-        return paymentDate;
-    }
+    public void setAppointment(AppointmentEntity appointment) { this.appointment = appointment; }
 
-    public void setPaymentDate(LocalDateTime paymentDate) {
-        this.paymentDate = paymentDate;
-    }
+    public Double getAmount() { return amount; }
 
-    public Long getAppointmentId() {
-        return appointmentId;
-    }
+    public void setAmount(Double amount) { this.amount = amount; }
 
-    public void setAppointmentId(Long appointmentId) {
-        this.appointmentId = appointmentId;
-    }
+    public String getPaymentMethod() { return paymentMethod; }
+
+    public void setPaymentMethod(String paymentMethod) { this.paymentMethod = paymentMethod; }
+
+    public String getPaymentStatus() { return paymentStatus; }
+
+    public void setPaymentStatus(String paymentStatus) { this.paymentStatus = paymentStatus; }
+
+    public LocalDateTime getBillDate() { return billDate; }
+
+    public void setBillDate(LocalDateTime billDate) { this.billDate = billDate; }
+
+    public String getDescription() { return description; }
+
+    public void setDescription(String description) { this.description = description; }
 }

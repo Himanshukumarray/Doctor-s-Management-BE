@@ -11,7 +11,6 @@ public class AppointmentRequestDto {
     private LocalTime appointmentTime;
     private String description;
 
-    // Getters and Setters
     public Long getDoctorId() {
         return doctorId;
     }

@@ -5,7 +5,7 @@ public class SignUpDto {
     private String name;
     private String email;
     private String password;
-    private String role;   // e.g., "DOCTOR" or "PATIENT"
+    private String role;
 
     // Default constructor
     public SignUpDto() {}
