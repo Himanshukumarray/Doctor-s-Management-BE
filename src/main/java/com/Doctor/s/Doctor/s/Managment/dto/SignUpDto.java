@@ -2,23 +2,36 @@ package com.Doctor.s.Doctor.s.Managment.dto;
 
 public class SignUpDto {
 
+    // COMMON FIELDS
     private String name;
     private String email;
     private String password;
-    private String role;
+    private String role;   // DOCTOR / PATIENT
+    private Integer age;
+    private String gender;
+    private String phone;
+    private String address;
 
-    // Default constructor
-    public SignUpDto() {}
+    // DOCTOR FIELDS
+    private String specialty;
+    private Double fee;
+    private String qualification;
+    private Integer experienceYears;
+    private String licenseNumber;
+    private String availability;
 
-    // All-args constructor
-    public SignUpDto(String name, String email, String password, String role) {
-        this.name = name;
-        this.email = email;
-        this.password = password;
-        this.role = role;
-    }
+    // PATIENT FIELDS
+    private String bloodGroup;
+    private String emergencyContactName;
+    private String emergencyContactPhone;
+    private String medicalHistory;
+    private String allergies;
+    private String insuranceProvider;
+    private String insuranceNumber;
 
-    // Getters and Setters
+    // getters + setters
+
+
     public String getName() {
         return name;
     }
@@ -49,5 +62,141 @@ public class SignUpDto {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getSpecialty() {
+        return specialty;
+    }
+
+    public void setSpecialty(String specialty) {
+        this.specialty = specialty;
+    }
+
+    public Double getFee() {
+        return fee;
+    }
+
+    public void setFee(Double fee) {
+        this.fee = fee;
+    }
+
+    public String getQualification() {
+        return qualification;
+    }
+
+    public void setQualification(String qualification) {
+        this.qualification = qualification;
+    }
+
+    public Integer getExperienceYears() {
+        return experienceYears;
+    }
+
+    public void setExperienceYears(Integer experienceYears) {
+        this.experienceYears = experienceYears;
+    }
+
+    public String getLicenseNumber() {
+        return licenseNumber;
+    }
+
+    public void setLicenseNumber(String licenseNumber) {
+        this.licenseNumber = licenseNumber;
+    }
+
+    public String getAvailability() {
+        return availability;
+    }
+
+    public void setAvailability(String availability) {
+        this.availability = availability;
+    }
+
+    public String getBloodGroup() {
+        return bloodGroup;
+    }
+
+    public void setBloodGroup(String bloodGroup) {
+        this.bloodGroup = bloodGroup;
+    }
+
+    public String getEmergencyContactName() {
+        return emergencyContactName;
+    }
+
+    public void setEmergencyContactName(String emergencyContactName) {
+        this.emergencyContactName = emergencyContactName;
+    }
+
+    public String getEmergencyContactPhone() {
+        return emergencyContactPhone;
+    }
+
+    public void setEmergencyContactPhone(String emergencyContactPhone) {
+        this.emergencyContactPhone = emergencyContactPhone;
+    }
+
+    public String getMedicalHistory() {
+        return medicalHistory;
+    }
+
+    public void setMedicalHistory(String medicalHistory) {
+        this.medicalHistory = medicalHistory;
+    }
+
+    public String getAllergies() {
+        return allergies;
+    }
+
+    public void setAllergies(String allergies) {
+        this.allergies = allergies;
+    }
+
+    public String getInsuranceProvider() {
+        return insuranceProvider;
+    }
+
+    public void setInsuranceProvider(String insuranceProvider) {
+        this.insuranceProvider = insuranceProvider;
+    }
+
+    public String getInsuranceNumber() {
+        return insuranceNumber;
+    }
+
+    public void setInsuranceNumber(String insuranceNumber) {
+        this.insuranceNumber = insuranceNumber;
     }
 }

@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
+import java.util.Optional;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
@@ -20,7 +21,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        UserEntity user = authRepository.findByEmail(email);
+        Optional<UserEntity> user = authRepository.findByEmail(email);
 
         if (user == null) {
             throw new UsernameNotFoundException("User not found with email: " + email);
@@ -28,9 +29,9 @@ public class CustomUserDetailsService implements UserDetailsService {
 
         // ✅ Add user role as authority (e.g., ROLE_DOCTOR, ROLE_PATIENT)
         return new User(
-                user.getEmail(),
-                user.getPassword(),
-                Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + user.getRole().toUpperCase()))
+                user.get().getEmail(),
+                user.get().getPassword(),
+                Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + user.get().getRole().toUpperCase()))
         );
     }
 }

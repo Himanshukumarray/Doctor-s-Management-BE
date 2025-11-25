@@ -7,16 +7,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/api/auth")
 public class AuthController {
 
     @Autowired
     private AuthService authService;
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody LoginDto loginDto) {
-        String response = authService.login(loginDto);
+    public ResponseEntity<?> login(@RequestBody LoginDto loginDto) {
+
+        Map<String, String> response = authService.login(loginDto);
+
+        // If authentication failed
+        if (response.containsKey("error")) {
+            return ResponseEntity.status(401).body(response);
+        }
+
+        // Success → token returned
         return ResponseEntity.ok(response);
     }
 

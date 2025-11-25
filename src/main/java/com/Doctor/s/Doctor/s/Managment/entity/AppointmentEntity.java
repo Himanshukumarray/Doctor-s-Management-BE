@@ -28,7 +28,7 @@ public class AppointmentEntity {
 
     private String description;
 
-    private String status; // e.g., "PENDING", "APPROVED", "REJECTED"
+    private String status;
 
     private LocalDateTime createdAt;
 

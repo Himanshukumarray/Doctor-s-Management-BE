@@ -1,16 +1,15 @@
 package com.Doctor.s.Doctor.s.Managment.controller;
-
 import com.Doctor.s.Doctor.s.Managment.dto.AppointmentRequestDto;
 import com.Doctor.s.Doctor.s.Managment.dto.AppointmentResponseDto;
 import com.Doctor.s.Doctor.s.Managment.services.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
+
 @RestController
-@RequestMapping("/appointments")
+@RequestMapping("/api/appointments")
 public class AppointmentController {
 
     @Autowired
