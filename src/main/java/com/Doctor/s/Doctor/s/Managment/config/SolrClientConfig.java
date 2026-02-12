@@ -10,9 +10,7 @@ public class SolrClientConfig {
 
     @Bean
     public SolrClient solrClient() {
-        return new HttpSolrClient.Builder(
-                "http://localhost:8983/solr/doctors" // Replace with your core name
-        ).build();
+        return new HttpSolrClient.Builder("http://localhost:8983/solr").build();
     }
 }
 

@@ -23,12 +23,13 @@ public class DoctorSolrController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<?> search(@RequestParam String keyword) {
+    public ResponseEntity<?> searchDoctors(@RequestParam String keyword) {
         try {
             return ResponseEntity.ok(service.searchDoctors(keyword));
         } catch (Exception e) {
             return ResponseEntity.status(500).body(e.getMessage());
         }
     }
+
 }
 

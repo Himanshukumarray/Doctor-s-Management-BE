@@ -67,6 +67,7 @@ public class AuthService {
 
         response.put("token", "Bearer "+ token);
         response.put("role", role);
+        response.put("name",user.getName());
         response.put("email", user.getEmail());
         response.put("id", String.valueOf(Id));
         ;

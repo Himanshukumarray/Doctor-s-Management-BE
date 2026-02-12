@@ -8,7 +8,6 @@ import org.apache.solr.common.SolrInputDocument;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -17,40 +16,29 @@ public class DoctorSolrService {
     @Autowired
     private SolrClient solrClient;
 
-    public String addDoctor(DoctorSearch doctor) throws Exception {
+    private final String CORE_NAME = "doctors";
+
+    public String addDoctor(DoctorSearch dto) throws Exception {
         SolrInputDocument doc = new SolrInputDocument();
-        doc.addField("id", doctor.getId());
-        doc.addField("name", doctor.getName());
-        doc.addField("specialization", doctor.getSpecialization());
+        doc.addField("id", dto.getId());
+        doc.addField("name", dto.getName());
+        doc.addField("specialization", dto.getSpecialization());
+        doc.addField("keywords", dto.getKeywords());
 
-        solrClient.add(doc);
-        solrClient.commit();
-
-        return "Indexed Successfully!";
+        solrClient.add(CORE_NAME, doc);
+        solrClient.commit(CORE_NAME);
+        return "Doctor Indexed Successfully!";
     }
 
     public List<DoctorSearch> searchDoctors(String keyword) throws Exception {
-
         SolrQuery query = new SolrQuery();
-        query.setQuery("name:*" + keyword + "* OR specialization:*" + keyword + "*");
+        query.setRequestHandler("/select");
+        query.set("defType", "edismax");
+        query.set("q", keyword);
+        query.set("qf", "specialization^4 keywords^3 name^2");
+        query.set("mm", "1");
 
-        QueryResponse response = solrClient.query(query);
-
-        return response.getResults().stream().map(doc ->
-                new DoctorSearch(
-                        getSingleValue(doc.getFieldValues("id")),
-                        getSingleValue(doc.getFieldValues("name")),
-                        getSingleValue(doc.getFieldValues("specialization"))
-                )
-        ).toList();
+        QueryResponse response = solrClient.query(CORE_NAME, query);
+        return response.getBeans(DoctorSearch.class);
     }
-
-    private String getSingleValue(Collection<Object> values) {
-        if (values == null) return null;
-        if (values.size() > 0) {
-            return values.stream().findFirst().get().toString();
-        }
-        return null;
-    }
-
 }
